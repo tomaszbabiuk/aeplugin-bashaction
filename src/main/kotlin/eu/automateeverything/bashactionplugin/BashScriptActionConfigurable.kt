@@ -73,17 +73,22 @@ class BashScriptActionConfigurable(
     private fun executeScript(instance: InstanceDto): Pair<Boolean,Resource> {
         val cmd = extractFieldValue(instance, commandField)
         val run = Runtime.getRuntime()
-        try {
+        return try {
             val pr = run.exec(cmd)
             pr.waitFor()
 
             val buf = BufferedReader(InputStreamReader(pr.inputStream))
-            val result = Resource.createUniResource(buf.lines().collect(Collectors.joining(System.lineSeparator())))
+            val resultRaw = buf.lines().collect(Collectors.joining(System.lineSeparator()))
+            val result = if (resultRaw.isNullOrBlank()) {
+                R.bashaction_emptyresult
+            } else {
+                Resource.createUniResource(resultRaw)
+            }
             val success = pr.exitValue() == 0
-            return Pair(success, result)
+            Pair(success, result)
         } catch (ex: Exception) {
             val result = Resource.createUniResource(ex.localizedMessage)
-            return Pair(false, result)
+            Pair(false, result)
         }
     }
 

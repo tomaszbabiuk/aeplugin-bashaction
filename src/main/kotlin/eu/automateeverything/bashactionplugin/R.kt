@@ -52,4 +52,9 @@ object R {
         "Calls bash action",
         "Wywołuje akcję systemową"
     )
+
+    val bashaction_emptyresult = Resource(
+        "No data",
+        "Brak danych"
+    )
 }
