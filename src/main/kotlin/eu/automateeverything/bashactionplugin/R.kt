@@ -24,8 +24,8 @@ object R {
     )
 
     val configurable_bash_script_action_title = Resource(
-        "Bash script",
-        "Skrypt bash"
+        "Bash/shell commands",
+        "Komendy bash/shell"
     )
 
     val configurable_bash_script_action_description = Resource(
@@ -44,8 +44,8 @@ object R {
     )
 
     val plugin_name = Resource(
-        "Bash action",
-        "Akcja bash (komenda)"
+        "Bash actions",
+        "Akcje bash (komenda)"
     )
 
     val plugin_description = Resource(
